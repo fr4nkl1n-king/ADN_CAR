@@ -240,6 +240,15 @@ body {
     height: 36px;
   }
 
+    .social-icons {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .social-icons img {
+    width: 40px;
+  }
+
   /* Menú principal con scroll horizontal y espacio adecuado */
   .main-nav ul {
     flex-wrap: nowrap;
