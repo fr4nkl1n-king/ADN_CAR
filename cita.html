@@ -311,16 +311,6 @@ municipio.addEventListener('change', () => {
 
 
     <div class="form-group">
-      <label for="direccion">Dirección Física:</label>
-      <input type="text" id="direccion" name="direccion" placeholder="Escriba su dirección o pegue link de maps" required>
-    </div>
-
-    <div class="form-group">
-      <label for="linkmap">Link de Google Maps o Waze (opcional):</label>
-      <input type="url" id="linkmap" name="linkmap" placeholder="Pegar aquí el link de Google Maps o Waze">
-    </div>
-
-    <div class="form-group">
       <label for="marca">Marca de su vehículo:</label>
       <input type="text" id="marca" name="marca" required>
     </div>
@@ -335,22 +325,10 @@ municipio.addEventListener('change', () => {
       <input type="text" id="anio" name="anio" required>
     </div>
 
-    <div class="form-group">
-      <label for="placa">Número de placa:</label>
-      <input type="text" id="placa" name="placa" required>
-    </div>
-
-    <div class="form-group">
-      <label for="kilometraje">Kilometraje</label>
-      <input type="text" id="kilometraje" name="kilometraje">
-    </div>
 
     <div class="form-group">
   <label>Seleccione el o los servicios que desea contratar:</label>
   <div class="checkbox-group">
-    <label class="checkbox-option">
-      <input type="checkbox" name="servicios[]" value="Servicio de membresía"> Servicio de membresía
-    </label>
     <br>
     <label class="checkbox-option">
       <input type="checkbox" name="servicios[]" value="Mantenimientos preventivos por kilometraje"> Mantenimientos preventivos por kilometraje
@@ -369,10 +347,6 @@ municipio.addEventListener('change', () => {
     </label>
     <br>
     <label class="checkbox-option">
-      <input type="checkbox" name="servicios[]" value="Tune up"> Tune up
-    </label>
-    <br>
-    <label class="checkbox-option">
       <input type="checkbox" name="servicios[]" value="Servicio de suspensión y dirección"> Servicio de suspensión y dirección
     </label><br>
     <label class="checkbox-option">
@@ -383,9 +357,6 @@ municipio.addEventListener('change', () => {
     </label><br>
     <label class="checkbox-option">
       <input type="checkbox" name="servicios[]" value="Servicio de baterías"> Servicio de baterías
-    </label><br>
-    <label class="checkbox-option">
-      <input type="checkbox" name="servicios[]" value="Revisión general para rtv"> Revisión general para rtv
     </label><br>
     <label class="checkbox-option">
       <input type="checkbox" name="servicios[]" value="Diagnóstico vehícular general y mantenimiento correctivo"> Diagnóstico vehícular general y mantenimiento correctivo
@@ -532,13 +503,9 @@ document.querySelector('.form').addEventListener('submit', function (e) {
     municipio: municipio,
     distrito: distrito,
     pais: pais,
-    direccion: formData.get('direccion'),
-    mapa: formData.get('linkmap'),
     marca: formData.get('marca'),
     modelo: formData.get('modelo'),
     anio: formData.get('anio'),
-    placa: formData.get('placa'),
-    kilometraje: formData.get('kilometraje'),
     servicios: servicios,
     contactoMedio: contactoMedio,
     contactoInfo: contactoInfo,
@@ -611,15 +578,11 @@ const mensajeWhatsApp = `
 ☎️ *Teléfono fijo:* ${cita.fijo || 'N/A'}
 
 🌍 *Residencia:* ${cita.extranjero === 'si' ? `Extranjero (${cita.pais})` : `El Salvador - ${cita.departamento}, ${cita.municipio}, ${cita.distrito}`}
-📍 *Dirección:* ${cita.direccion}
-🗺️ *Mapa:* ${cita.mapa || 'No proporcionado'}
 
 🚗 *Vehículo:*
 - Marca: ${cita.marca}
 - Modelo: ${cita.modelo}
 - Año: ${cita.anio}
-- Placa: ${cita.placa}
-- Kilometraje: ${cita.kilometraje || 'No indicado'}
 
 🛠️ *Servicios solicitados:*
 ${cita.servicios.map(s => `- ${s}`).join('\n')}
