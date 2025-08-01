@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADN CAR - Contacto</title>
+  <link rel="stylesheet" href="tiposervicios.css" />
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <img src="img/ADNCAR.png" alt="Logo" class="logo" />
+      <div class="social-icons">
+        <a href="https://www.instagram.com/eliezer_g59/"><img src="instagram.png" alt="Instagram" /></a>
+        <a href="https://www.facebook.com/frank.cabrera.408468/"><img src="Facebook.png" alt="Facebook" /></a>
+        <a href="https://wa.me/50371518713"><img src="whatsapp.png" alt="WhatsApp" /></a>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="taller.html">Taller</a></li>
+        <li><a href="cita.html">Cita</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <button id="mute-btn" class="mute-anim">
+          <span class="icon sound-on">🔊</span>
+          <span class="icon sound-off">🔇</span>
+        </button>
+      </ul>
+    </nav>
+  </header>
+
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="img/Fondo.mp4" type="video/mp4">
+</video>
+
+ <section class="seccion-tuneup anim-slidein">
+    <div class="contenedor-tuneup">
+      <h2 class="titulo-principal">🔧 Cambio de Aceite de <span>Transmisión</span></h2>
+
+      <div>
+        <h3 class="subtitulo">📌 ¿Por qué es importante?</h3>
+        <p class="texto">
+          El cambio de aceite de caja mantiene tu transmisión limpia, funcional y protegida.
+          Los lubricantes modernos ofrecen mayor durabilidad, pero el mantenimiento sigue siendo clave.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="subtitulo">🛠️ ¿Qué incluye nuestro servicio?</h3>
+        <ul class="lista-servicio">
+          <li>Drenado completo del aceite usado.</li>
+          <li>Limpieza profesional de componentes.</li>
+          <li>Colocación del aceite nuevo (alta calidad).</li>
+          <li>Verificación precisa del nivel.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="subtitulo">🚀 Beneficios Inmediatos</h3>
+        <ul class="lista-beneficios">
+          <li>Prolonga la vida útil de la transmisión.</li>
+          <li>Optimiza el rendimiento general del vehículo.</li>
+          <li>Evita reparaciones costosas a futuro.</li>
+          <li>Servicio a domicilio premium.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="subtitulo">🏷️ Marcas y Asesoría</h3>
+        <ul class="lista-marcas">
+          <li><strong>Utilizamos:</strong> Aceites Gonher.</li>
+          <li><strong>Precio:</strong> Varía según tipo de vehículo. Contáctanos y te asesoramos sin compromiso.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-agenda glow-border">
+      <h3>Agenda tu Cita</h3>
+      <p class="texto-agenda">¿Listo para mantener tu vehículo en las mejores condiciones? Agenda tu cita ahora y pronto nos pondremos en contacto contigo.</p>
+      <a href="cita.html" class="btn-agendar">Agendar Cita</a>
+    </div>
+  </section>
+
+
+<footer class="footer">
+  <div class="footer-section logo-section">
+    <img src="img/ADNCAR.png" alt="Logo ADN CAR" class="logo" />
+  </div>
+
+  <div class="footer-section text-section">
+    <p class="direccion">📍 Calle Central, Cuscatancingo, San Salvador, El Salvador</p>
+    <p class="copyright">© 2025 ADN CAR. Todos los derechos reservados.</p>
+  </div>
+
+  <div class="footer-section social-icons">
+    <a href="https://www.instagram.com/eliezer_g59/" target="_blank">
+      <img src="instagram.png" alt="Instagram" />
+    </a>
+    <a href="https://www.facebook.com/frank.cabrera.408468/" target="_blank">
+      <img src="Facebook.png" alt="Facebook" />
+    </a>
+    <a href="https://wa.me/50371518713" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" />
+    </a>
+  </div>
+</footer>
+
+  <audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
+
+  <script>
+    const muteBtn = document.getElementById('mute-btn');
+    const bgMusic = document.getElementById('bg-music');
+    muteBtn.addEventListener('click', () => {
+      bgMusic.muted = !bgMusic.muted;
+      muteBtn.classList.toggle('muted');
+    });
+    window.addEventListener('load', () => {
+      muteBtn.classList.toggle('muted', bgMusic.muted);
+    });
+    window.addEventListener('click', () => {
+      if (bgMusic.paused) bgMusic.play().catch(() => {});
+    }, { once: true });
+
+    // Confirmación de envío
+    document.getElementById('contacto-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Gracias por contactarnos. Tu mensaje ha sido enviado.");
+      this.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADN CAR - Cita</title>
+    <link rel="stylesheet" href="cita.css">
+</head>
+<body>
+       <header>
+  <div class="top-bar">
+    <img src="img/ADNCAR.png" alt="Logo" class="logo">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/eliezer_g59/"><img src="instagram.png" alt="Instagram"/></a>
+      <a href="https://www.facebook.com/frank.cabrera.408468/"><img src="Facebook.png" alt="Facebook"/></a>
+      <a href="https://wa.me/50371518713"><img src="whatsapp.png" alt="WhatsApp"/></a>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="taller.html">Taller</a></li>
+      <li><a href="cita.html">Cita</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <button id="mute-btn" class="mute-anim">
+        <span class="icon sound-on">🔊</span>
+        <span class="icon sound-off">🔇</span>
+      </button>
+    </ul>
+  </nav>
+</header>
+
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="img/Fondo.mp4" type="video/mp4">
+</video>
+
+    </section>
+   <script>
+  const infoItems = document.querySelectorAll('.info-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Asigna un delay basado en la posición del item
+        entry.target.style.animationDelay = `${index * 0.2}s`;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Solo una vez
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  infoItems.forEach((item) => observer.observe(item));
+</script>
+<audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
+
+<script>
+  const muteBtn = document.getElementById('mute-btn');
+  const bgMusic = document.getElementById('bg-music');
+
+  muteBtn.addEventListener('click', () => {
+    if (bgMusic.muted) {
+      bgMusic.muted = false;
+      muteBtn.classList.remove('muted');
+    } else {
+      bgMusic.muted = true;
+      muteBtn.classList.add('muted');
+    }
+  });
+
+  window.addEventListener('load', () => {
+    if (bgMusic.muted) {
+      muteBtn.classList.add('muted');
+    } else {
+      muteBtn.classList.remove('muted');
+    }
+  });
+
+  window.addEventListener('click', () => {
+    if (bgMusic.paused) {
+      bgMusic.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+
+
+  <form class="form">
+    <h2>Solicitud del servicio</h2>
+
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Carlos" required>
+    </div>
+
+    <div class="form-group">
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" name="apellidos" placeholder="Herrera Arias" required>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" placeholder="carlosherreraarias@gmail.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="tel-movil">Teléfono móvil:</label>
+      <input type="tel" id="tel-movil" name="tel-movil" placeholder="87872585" required>
+    </div>
+
+    <div class="form-group">
+      <label for="tel-fijo">Teléfono fijo:</label>
+      <input type="tel" id="tel-fijo" name="tel-fijo" placeholder="22242526">
+    </div>
+<!-- ¿Es extranjero? -->
+<div class="form-group">
+  <label for="extranjero">¿Es extranjero o no residente en El Salvador?</label>
+  <select id="extranjero" name="extranjero" required>
+    <option value="">Seleccione una opción</option>
+    <option value="no">No, soy residente</option>
+    <option value="si">Sí, soy extranjero</option>
+  </select>
+</div>
+
+<!-- Eliminado script duplicado para evitar redeclaración de extranjeroSelect -->
+
+  <div id="zona-local">
+  <!-- Departamento -->
+  <div class="form-group">
+    <label for="departamento">Departamento:</label>
+    <select id="departamento" name="departamento" required>
+      <option value="">Seleccione un departamento</option>
+    </select>
+  </div>
+
+  <!-- Municipio -->
+  <div class="form-group">
+    <label for="municipio">Municipio:</label>
+    <select id="municipio" name="municipio" required disabled>
+      <option value="">Seleccione un municipio</option>
+    </select>
+  </div>
+
+  <!-- Distrito -->
+  <div class="form-group">
+    <label for="distrito">Distrito:</label>
+    <select id="distrito" name="distrito" required disabled>
+      <option value="">Seleccione un distrito</option>
+    </select>
+  </div>
+</div>
+
+
+  <!-- Para extranjeros -->
+<div id="zona-extranjero" class="form-group" style="display: none;">
+  <label for="pais_extranjero">País donde reside:</label>
+  <input type="text" id="pais_extranjero" name="pais_extranjero" placeholder="Ej.: México, Colombia, Estados Unidos">
+</div>
+
+<script>
+  const extranjeroSelect = document.getElementById("extranjero");
+  const zonaLocal = document.getElementById("zona-local");
+  const zonaEx = document.getElementById("zona-extranjero");
+
+  const departamento = document.getElementById("departamento");
+  const municipio = document.getElementById("municipio");
+  const distrito = document.getElementById("distrito");
+  const paisExtranjero = document.getElementById("pais_extranjero");
+
+  extranjeroSelect.addEventListener("change", () => {
+    const esExtranjero = extranjeroSelect.value === "si";
+
+    // Mostrar u ocultar zonas
+    zonaLocal.style.display = esExtranjero ? "none" : "block";
+    zonaEx.style.display = esExtranjero ? "block" : "none";
+
+    // Requerimientos dinámicos
+    departamento.required = !esExtranjero;
+    municipio.required = !esExtranjero;
+    distrito.required = !esExtranjero;
+    paisExtranjero.required = esExtranjero;
+  });
+</script>
+
+
+<script>
+// datos basados en la reforma de 2024, con 44 municipios y 262 distritos
+const datos = {
+  "Ahuachapán": {
+    "Ahuachapán Norte": ["Atiquizaya","El Refugio","San Lorenzo","Turín"],
+    "Ahuachapán Centro": ["Ahuachapán","Apaneca","Concepción de Ataco","Tacuba"],
+    "Ahuachapán Sur": ["Guaymango","Jujutla","San Francisco Menéndez","San Pedro Puxtla"]
+  },
+  "Cabañas": {
+    "Cabañas Este": ["Guacotecti","San Isidro","Sensuntepeque","Victoria","Dolores"],
+    "Cabañas Oeste": ["Cinquera","Ilobasco","Jutiapa","Tejutepeque"]
+  },
+  "Chalatenango": {
+    "Chalatenango Norte": ["Citalá","La Palma","San Ignacio"],
+    "Chalatenango Centro": ["Agua Caliente","Dulce Nombre de María","El Paraíso","La Reina","Nueva Concepción","San Fernando","San Francisco Morazán","San Rafael","Santa Rita","Tejutla"],
+    "Chalatenango Sur": ["Arcatao","Azacualpa","Cancasque","Chalatenango","Comalapa","Concepción Quezaltepeque","El Carrizal","La Laguna","Las Vueltas","Las Flores","Nombre de Jesús","Nueva Trinidad","Ojos de Agua","Potonico","San Antonio de la Cruz","San Antonio Los Ranchos","San Francisco Lempa","San Isidro Labrador","San Luis del Carmen","San Miguel de Mercedes"]
+  },
+  "Cuscatlán": {
+    "Cuscatlán Norte": ["Suchitoto","San José Guayabal","Oratorio de Concepción","San Bartolomé Perulapía","San Pedro Perulapán"],
+    "Cuscatlán Sur": ["Cojutepeque","Candelaria","El Carmen","El Rosario","Monte San Juan","San Cristóbal","San Rafael Cedros","San Ramón","Santa Cruz Analquito","Santa Cruz Michapa","Tenancingo"]
+  },
+  "La Libertad": {
+    "La Libertad Norte": ["Quezaltepeque","San Matías","San Pablo Tacachico"],
+    "La Libertad Centro": ["San Juan Opico","Ciudad Arce"],
+    "La Libertad Oeste": ["Colón","Jayaque","Sacacoyo","Tepecoyo","Talnique"],
+    "La Libertad Este": ["Antiguo Cuscatlán","Huizúcar","Nuevo Cuscatlán","San José Villanueva","Zaragoza"],
+    "La Libertad Costa": ["Chiltiupán","Jicalapa","La Libertad","Tamanique","Teotepeque"],
+    "La Libertad Sur": ["Comasagua","Santa Tecla"]
+  },
+  "La Paz": {
+    "La Paz Oeste": ["Cuyultitán","Olocuilta","San Juan Talpa","San Luis Talpa","San Pedro Masahuat","Tapalhuaca","San Francisco Chinameca"],
+    "La Paz Centro": ["El Rosario","Jerusalén","Mercedes La Ceiba","Paraíso de Osorio","San Antonio Masahuat","San Emigdio","San Juan Tepezontes","San Luis La Herradura","San Miguel Tepezontes","San Pedro Nonualco","Santa María Ostuma","Santiago Nonualco"],
+    "La Paz Este": ["San Juan Nonualco","San Rafael Obrajuelo","Zacatecoluca"]
+  },
+  "La Unión": {
+    "La Unión Norte": ["Anamorós","Bolívar","Concepción de Oriente","El Sauce","Lislique","Nueva Esparta","Pasaquina","Polorós","San José La Fuente","Santa Rosa de Lima"],
+    "La Unión Sur": ["Conchagua","El Carmen","Intipucá","La Unión","Meanguera del Golfo","San Alejo","Yayantique","Yucuaiquín"]
+  },
+  "Morazán": {
+    "Morazán Norte": ["Arambala","Cacaopera","Corinto","El Rosario","Joateca","Jocoaitique","Meanguera","Perquín","San Fernando","San Isidro","Torola"],
+    "Morazán Sur": ["Chilanga","Delicias de Concepción","El Divisadero","Gualococti","Guatajiagua","Jocoro","Lolotiquillo","Osicala","San Carlos","San Francisco Gotera","San Simón","Sensembra","Sociedad","Yamabal","Yoloaiquín"]
+  },
+  "San Miguel": {
+    "San Miguel Norte": ["Ciudad Barrios","Sesori","Nuevo Edén de San Juan","San Gerardo","San Luis de la Reina","Carolina","San Antonio","Chapeltique"],
+    "San Miguel Centro": ["San Miguel","Comacarán","Uluazapa","Moncagua","Quelepa","Chirilagua"],
+    "San Miguel Oeste": ["Chinameca","El Tránsito","Lolotique","Nueva Guadalupe","San Jorge","San Rafael Oriente"]
+  },
+  "San Salvador": {
+    "San Salvador Norte": ["Aguilares","El Paisnal","Guazapa"],
+    "San Salvador Oeste": ["Apopa","Nejapa"],
+    "San Salvador Este": ["Ilopango","San Martín","Soyapango","Tonacatepeque"],
+    "San Salvador Centro": ["Ayutuxtepeque","Mejicanos","Cuscatancingo","Ciudad Delgado","San Salvador"],
+    "San Salvador Sur": ["San Marcos","Santo Tomás","Santiago Texacuangos","Panchimalco","Rosario de Mora"]
+  },
+  "San Vicente": {
+    "San Vicente Norte": ["Apastepeque","Santa Clara","San Ildefonso","San Esteban Catarina","San Sebastián","San Lorenzo","Santo Domingo"],
+    "San Vicente Sur": ["San Vicente","Guadalupe","San Cayetano Istepeque","Tecoluca","Tepetitán","Verapaz"]
+  },
+  "Santa Ana": {
+    "Santa Ana Norte": ["Masahuat","Metapán","Santa Rosa Guachipilín","Texistepeque"],
+    "Santa Ana Centro": ["Santa Ana"],
+    "Santa Ana Este": ["Coatepeque","El Congo"],
+    "Santa Ana Oeste": ["Candelaria de la Frontera","Chalchuapa","El Porvenir","San Antonio Pajonal","San Sebastián Salitrillo","Santiago de la Frontera"]
+  },
+  "Sonsonate": {
+    "Sonsonate Norte": ["Juayúa","Nahuizalco","Salcoatitán","Santa Catarina Masahuat"],
+    "Sonsonate Centro": ["Sonsonate","Sonzacate","Nahulingo","San Antonio del Monte","Santo Domingo de Guzmán"],
+    "Sonsonate Este": ["Izalco","Armenia","Caluco","San Julián","Cuisnahuat","Santa Isabel Ishuatán"],
+    "Sonsonate Oeste": ["Acajutla"]
+  },
+  "Usulután": {
+    "Usulután Norte": ["Alegría","Berlín","El Triunfo","Estanzuelas","Jucuapa","Mercedes Umaña","Nueva Granada","San Buenaventura","Santiago de María"],
+    "Usulután Este": ["California","Concepción Batres","Ereguayquín","Jucuarán","Ozatlán","Santa Elena","San Dionisio","Santa María","Tecapán","Usulután"],
+    "Usulután Oeste": ["Jiquilisco","Puerto El Triunfo","San Agustín","San Francisco Javier"]
+  }
+};
+
+// const departamento = document.getElementById('departamento');
+// const municipio = document.getElementById('municipio');
+// const distrito = document.getElementById('distrito');
+
+// cargar departamentos al inicio
+Object.keys(datos).forEach(depto => {
+  departamento.add(new Option(depto, depto));
+});
+
+departamento.addEventListener('change', () => {
+  municipio.innerHTML = '<option value="">Seleccione un municipio</option>';
+  distrito.innerHTML = '<option value="">Seleccione un distrito</option>';
+  municipio.disabled = distrito.disabled = !datos[departamento.value];
+
+  if (datos[departamento.value]) {
+    Object.keys(datos[departamento.value]).forEach(m => {
+      municipio.add(new Option(m, m));
+    });
+  }
+});
+
+municipio.addEventListener('change', () => {
+  distrito.innerHTML = '<option value="">Seleccione un distrito</option>';
+  const arr = datos[departamento.value]?.[municipio.value] || [];
+  distrito.disabled = arr.length === 0;
+
+  arr.forEach(d => {
+    distrito.add(new Option(d, d));
+  });
+});
+</script>
+
+
+    <div class="form-group">
+      <label for="direccion">Dirección Física:</label>
+      <input type="text" id="direccion" name="direccion" placeholder="Escriba su dirección o pegue link de maps" required>
+    </div>
+
+    <div class="form-group">
+      <label for="linkmap">Link de Google Maps o Waze (opcional):</label>
+      <input type="url" id="linkmap" name="linkmap" placeholder="Pegar aquí el link de Google Maps o Waze">
+    </div>
+
+    <div class="form-group">
+      <label for="marca">Marca de su vehículo:</label>
+      <input type="text" id="marca" name="marca" required>
+    </div>
+
+    <div class="form-group">
+      <label for="modelo">Modelo:</label>
+      <input type="text" id="modelo" name="modelo" required>
+    </div>
+
+    <div class="form-group">
+      <label for="anio">Año:</label>
+      <input type="text" id="anio" name="anio" required>
+    </div>
+
+    <div class="form-group">
+      <label for="placa">Número de placa:</label>
+      <input type="text" id="placa" name="placa" required>
+    </div>
+
+    <div class="form-group">
+      <label for="kilometraje">Kilometraje</label>
+      <input type="text" id="kilometraje" name="kilometraje">
+    </div>
+
+    <div class="form-group">
+  <label>Seleccione el o los servicios que desea contratar:</label>
+  <div class="checkbox-group">
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Servicio de membresía"> Servicio de membresía
+    </label>
+    <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Mantenimientos preventivos por kilometraje"> Mantenimientos preventivos por kilometraje
+    </label>
+    <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Cambio de aceite y filtro del motor"> Cambio de aceite y filtro del motor
+    </label>
+    <br> 
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Cambio de aceite de transmisión automática y manual"> Cambio de aceite de transmisión automática y manual
+    </label>
+    <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Servicio de frenos"> Servicio de frenos
+    </label>
+    <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Tune up"> Tune up
+    </label>
+    <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Servicio de suspensión y dirección"> Servicio de suspensión y dirección
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Diagnóstico y limpieza de inyectores"> Diagnóstico y limpieza de inyectores
+    </label> <br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Servicio de llantas"> Servicio de llantas
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Servicio de baterías"> Servicio de baterías
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Revisión general para rtv"> Revisión general para rtv
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Diagnóstico vehícular general y mantenimiento correctivo"> Diagnóstico vehícular general y mantenimiento correctivo
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Revisión de autos a comprar"> Revisión de autos a comprar
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Revisión del aire acondicionado del vehículo"> Revisión del aire acondicionado del vehículo
+    </label><br>
+    <label class="checkbox-option">
+      <input type="checkbox" name="servicios[]" value="Otros"> Otros
+    </label>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="contacto-medio">¿Cómo desea que lo contactemos directamente?</label>
+  <select id="contacto-medio" name="contacto-medio" required>
+    <option value="">Seleccione un medio</option>
+    <option value="whatsapp">WhatsApp</option>
+    <option value="facebook">Facebook</option>
+    <option value="instagram">Instagram</option>
+    <option value="correo">Correo electrónico</option>
+    <option value="llamada">Llamada telefónica</option>
+  </select>
+</div>
+
+<div class="form-group" id="contacto-info" style="display: none;">
+  <label id="label-contacto" for="info-contacto">Ingrese su contacto:</label>
+  <input type="text" id="info-contacto" name="info-contacto" placeholder="Ejemplo: +50371518713" required>
+</div>
+
+<script>
+  const medioSelect = document.getElementById("contacto-medio");
+  const contactoDiv = document.getElementById("contacto-info");
+  const labelContacto = document.getElementById("label-contacto");
+  const inputContacto = document.getElementById("info-contacto");
+
+  medioSelect.addEventListener("change", () => {
+    const medio = medioSelect.value;
+    contactoDiv.style.display = medio ? "block" : "none";
+
+    switch (medio) {
+      case "whatsapp":
+        labelContacto.textContent = "Ingrese su número de WhatsApp:";
+        inputContacto.placeholder = "Ejemplo: +50371518713";
+        inputContacto.name = "whatsapp_contacto";
+        inputContacto.type = "tel";
+        break;
+      case "facebook":
+        labelContacto.textContent = "Ingrese su perfil o enlace de Facebook:";
+        inputContacto.placeholder = "Ejemplo: https://facebook.com/usuario";
+        inputContacto.name = "facebook_contacto";
+        inputContacto.type = "text";
+        break;
+      case "instagram":
+        labelContacto.textContent = "Ingrese su usuario o enlace de Instagram:";
+        inputContacto.placeholder = "Ejemplo: https://instagram.com/usuario";
+        inputContacto.name = "instagram_contacto";
+        inputContacto.type = "text";
+        break;
+      case "correo":
+        labelContacto.textContent = "Ingrese su correo electrónico:";
+        inputContacto.placeholder = "Ejemplo: usuario@correo.com";
+        inputContacto.name = "correo_contacto";
+        inputContacto.type = "email";
+        break;
+      case "llamada":
+        labelContacto.textContent = "Ingrese su número telefónico:";
+        inputContacto.placeholder = "Ejemplo: 22241234";
+        inputContacto.name = "telefono_contacto";
+        inputContacto.type = "tel";
+        break;
+      default:
+        inputContacto.name = "info_contacto";
+        inputContacto.type = "text";
+        break;
+    }
+  });
+</script>
+  
+<div class="form-group">
+  <label for="comentarios">Comentarios:</label>
+ <textarea id="comentarios" name="comentarios" rows="4" placeholder="Aquí puede dar especificaciones del servicio que necesita realizar"class="form-control"></textarea>
+</div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-enviar">Enviar</button>
+    </div>
+  
+<script>
+document.querySelector('.form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const servicios = formData.getAll('servicios[]');
+
+  // Detectar si es extranjero
+  const extranjero = formData.get('extranjero');
+  let departamento = '', municipio = '', distrito = '', pais = '';
+  if (extranjero === 'si') {
+    pais = formData.get('pais_extranjero') || '';
+  } else {
+    departamento = formData.get('departamento') || '';
+    municipio = formData.get('municipio') || '';
+    distrito = formData.get('distrito') || '';
+  }
+
+  // Detectar el medio de contacto
+  const contactoMedio = formData.get('contacto-medio');
+  let contactoInfo = '';
+
+  // Verifica específicamente los campos nombrados dinámicamente
+  switch (contactoMedio) {
+    case 'whatsapp':
+      contactoInfo = formData.get('whatsapp_contacto');
+      break;
+    case 'facebook':
+      contactoInfo = formData.get('facebook_contacto');
+      break;
+    case 'instagram':
+      contactoInfo = formData.get('instagram_contacto');
+      break;
+    case 'correo':
+      contactoInfo = formData.get('correo_contacto');
+      break;
+    case 'llamada':
+      contactoInfo = formData.get('telefono_contacto');
+      break;
+    default:
+      contactoInfo = formData.get('info-contacto') || '';
+  }
+
+  const cita = {
+    nombre: formData.get('nombre'),
+    apellidos: formData.get('apellidos'),
+    correo: formData.get('correo'),
+    telefono: formData.get('tel-movil'),
+    fijo: formData.get('tel-fijo'),
+    extranjero: extranjero,
+    departamento: departamento,
+    municipio: municipio,
+    distrito: distrito,
+    pais: pais,
+    direccion: formData.get('direccion'),
+    mapa: formData.get('linkmap'),
+    marca: formData.get('marca'),
+    modelo: formData.get('modelo'),
+    anio: formData.get('anio'),
+    placa: formData.get('placa'),
+    kilometraje: formData.get('kilometraje'),
+    servicios: servicios,
+    contactoMedio: contactoMedio,
+    contactoInfo: contactoInfo,
+    comentarios: formData.get('comentarios'),
+    estado: 'En espera'
+  };
+
+  console.log(cita); // Para depuración
+
+  const citas = JSON.parse(localStorage.getItem('citas')) || [];
+  citas.push(cita);
+  localStorage.setItem('citas', JSON.stringify(citas));
+
+// Mostrar mensaje mejorado
+ // ... dentro del submit event listener, después de guardar en localStorage ...
+
+// Eliminar mensaje anterior si existe
+const mensajeExistente = document.getElementById('mensaje-exito');
+if (mensajeExistente) {
+  mensajeExistente.remove();
+}
+
+// Crear mensaje
+const avisoExito = document.createElement("div");
+  avisoExito.id = "aviso-exito";
+  avisoExito.style.position = "fixed";
+  avisoExito.style.top = "20px";
+  avisoExito.style.right = "20px";
+  avisoExito.style.padding = "15px 25px";
+  avisoExito.style.backgroundColor = "#28a745";
+  avisoExito.style.color = "#fff";
+  avisoExito.style.borderRadius = "12px";
+  avisoExito.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+  avisoExito.style.fontSize = "16px";
+  avisoExito.style.fontWeight = "bold";
+  avisoExito.style.opacity = "0";
+  avisoExito.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+  avisoExito.style.transform = "translateY(-20px)";
+  avisoExito.style.zIndex = "10000";
+  avisoExito.textContent = "✅ ¡Su cita ha sido registrada exitosamente. Pronto nos pondremos en contacto!";
+
+  // Añadir al body
+  document.body.appendChild(avisoExito);
+
+  // Forzar reflow para que tome la transición
+  void avisoExito.offsetWidth;
+
+  // Mostrar
+  avisoExito.style.opacity = "1";
+  avisoExito.style.transform = "translateY(0)";
+
+  // Ocultar después de 3.5 segundos con transición
+  setTimeout(() => {
+    avisoExito.style.opacity = "0";
+    avisoExito.style.transform = "translateY(-20px)";
+  }, 3500);
+
+  // Remover del DOM luego de la transición (unos 600ms después de ocultar)
+  setTimeout(() => {
+    avisoExito.remove();
+  }, 4100);
+
+// Generar mensaje para WhatsApp
+const mensajeWhatsApp = `
+🛠️ *Solicitud de Servicio - ADN CAR* 🛠️
+
+👤 *Nombre:* ${cita.nombre} ${cita.apellidos}
+📧 *Correo:* ${cita.correo}
+📱 *Teléfono móvil:* ${cita.telefono}
+☎️ *Teléfono fijo:* ${cita.fijo || 'N/A'}
+
+🌍 *Residencia:* ${cita.extranjero === 'si' ? `Extranjero (${cita.pais})` : `El Salvador - ${cita.departamento}, ${cita.municipio}, ${cita.distrito}`}
+📍 *Dirección:* ${cita.direccion}
+🗺️ *Mapa:* ${cita.mapa || 'No proporcionado'}
+
+🚗 *Vehículo:*
+- Marca: ${cita.marca}
+- Modelo: ${cita.modelo}
+- Año: ${cita.anio}
+- Placa: ${cita.placa}
+- Kilometraje: ${cita.kilometraje || 'No indicado'}
+
+🛠️ *Servicios solicitados:*
+${cita.servicios.map(s => `- ${s}`).join('\n')}
+
+📡 *Contacto preferido:* ${cita.contactoMedio}
+🔗 *Dato de contacto:* ${cita.contactoInfo}
+
+📝 *Comentarios:* ${cita.comentarios || 'Ninguno'}
+`;
+
+// Codificar mensaje para URL
+const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+
+// Redireccionar a WhatsApp Web o app
+const numeroDestino = '50360698188';
+const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+window.open(enlaceWhatsApp, '_blank');
+
+  // Resetear el formulario
+  this.reset();
+
+  // Aquí termina tu lógica de submit
+});
+</script>
+
+
+</form>
+
+
+
+
+<footer class="footer">
+  <div class="footer-section logo-section">
+    <img src="img/ADNCAR.png" alt="Logo ADN CAR" class="logo" />
+  </div>
+
+  <div class="footer-section text-section">
+    <p class="direccion">📍 Calle Central, Cuscatancingo, San Salvador, El Salvador</p>
+    <p class="copyright">© 2025 ADN CAR. Todos los derechos reservados.</p>
+  </div>
+
+  <div class="footer-section social-icons">
+    <a href="https://www.instagram.com/eliezer_g59/" target="_blank">
+      <img src="instagram.png" alt="Instagram" />
+    </a>
+    <a href="https://www.facebook.com/frank.cabrera.408468/" target="_blank">
+      <img src="Facebook.png" alt="Facebook" />
+    </a>
+    <a href="https://wa.me/50371518713" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" />
+    </a>
+  </div>
+</footer>
+</body>
+</html>

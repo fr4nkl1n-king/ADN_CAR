@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADN CAR - Contacto</title>
+  <link rel="stylesheet" href="contacto.css" />
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <img src="img/ADNCAR.png" alt="Logo" class="logo" />
+      <div class="social-icons">
+        <a href="https://www.instagram.com/eliezer_g59/"><img src="instagram.png" alt="Instagram" /></a>
+        <a href="https://www.facebook.com/frank.cabrera.408468/"><img src="Facebook.png" alt="Facebook" /></a>
+        <a href="https://wa.me/50371518713"><img src="whatsapp.png" alt="WhatsApp" /></a>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="taller.html">Taller</a></li>
+        <li><a href="cita.html">Cita</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <button id="mute-btn" class="mute-anim">
+          <span class="icon sound-on">🔊</span>
+          <span class="icon sound-off">🔇</span>
+        </button>
+      </ul>
+    </nav>
+  </header>
+
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="img/Fondo.mp4" type="video/mp4">
+</video>
+
+  <main>
+    <div class="container">
+    <section class="contacto-section">
+      <h2>Contáctanos</h2>
+      <dr></dr>
+      <form id="contacto-form" class="contacto-form">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="ej.: Carlos" required />
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="ej.: Herrera Arias" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" placeholder="ej.: carlosherreraarias@gmail.com" required />
+
+        <label for="telefono">Teléfono móvil:</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="ej.: 87872585" pattern="[2-9]{1}[0-9]{7}" required />
+
+      <fieldset>
+  <legend>¿Qué tipo de mensaje desea enviar?</legend>
+  <label><input type="radio" name="tipo" value="Queja" required />Queja</label>
+  <label><input type="radio" name="tipo" value="Sugerencia" />Sugerencia</label>
+  <label><input type="radio" name="tipo" value="Felicitación" />Felicitación</label>
+</fieldset>
+
+
+        <label for="mensaje">Detalle su mensaje a continuación: </label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <section id="mensajes-enviados" class="mensajes-container">
+      <script>
+// Crear mensaje de éxito (una sola vez)
+function mostrarAvisoExito() {
+  const avisoExito = document.createElement("div");
+  avisoExito.id = "aviso-exito";
+  avisoExito.style.position = "fixed";
+  avisoExito.style.top = "20px";
+  avisoExito.style.right = "20px";
+  avisoExito.style.padding = "15px 25px";
+  avisoExito.style.backgroundColor = "#28a745";
+  avisoExito.style.color = "#fff";
+  avisoExito.style.borderRadius = "12px";
+  avisoExito.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+  avisoExito.style.fontSize = "16px";
+  avisoExito.style.fontWeight = "bold";
+  avisoExito.style.opacity = "0";
+  avisoExito.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+  avisoExito.style.transform = "translateY(-20px)";
+  avisoExito.style.zIndex = "10000";
+  avisoExito.textContent = "✅ ¡Gracias por tu mensaje! Lo hemos recibido correctamente.";
+  document.body.appendChild(avisoExito);
+
+  // Mostrar con animación y ocultar después
+  setTimeout(() => {
+    avisoExito.style.opacity = "1";
+    avisoExito.style.transform = "translateY(0)";
+  }, 10);
+  setTimeout(() => {
+    avisoExito.style.opacity = "0";
+    avisoExito.style.transform = "translateY(-20px)";
+    setTimeout(() => {
+      avisoExito.remove();
+    }, 600);
+  }, 3500);
+}
+
+// Manejo del envío del formulario
+// Manejo del envío del formulario
+document.getElementById('contacto-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellidos = document.getElementById("apellidos").value.trim();
+  const correo = document.getElementById("email").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const tipo = document.querySelector('input[name="tipo"]:checked')?.value || "Mensaje";
+  const texto = document.getElementById("mensaje").value.trim();
+
+  const nuevoComentario = {
+    nombre: `${nombre} ${apellidos}`,
+    correo,
+    telefono,
+    tipo,
+    texto,
+    estado: "Pendiente"
+  };
+
+  // Guardar comentario en localStorage
+  const comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+  comentarios.push(nuevoComentario);
+  localStorage.setItem("comentarios", JSON.stringify(comentarios));
+
+  // Mostrar mensaje de éxito
+  mostrarAvisoExito();
+
+  // Enviar mensaje por WhatsApp
+  const mensajeWhatsapp = `
+📬 *Nuevo mensaje de contacto - ADN CAR* 📬
+
+👤 *Nombre:* ${nombre} ${apellidos}
+📧 *Correo:* ${correo}
+📱 *Teléfono:* ${telefono}
+📝 *Tipo de mensaje:* ${tipo}
+💬 *Mensaje:* ${texto}
+  `;
+  const mensajeCodificado = encodeURIComponent(mensajeWhatsapp);
+  const numeroDestino = "50360698188";
+  const link = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+  window.open(link, '_blank');
+
+  // Limpiar formulario
+  this.reset();
+
+  // Actualizar lista visible
+  mostrarMensajesEnviados();
+});
+
+// Mostrar mensajes al cargar la página
+window.addEventListener('load', mostrarMensajesEnviados);
+</script>
+    </section>
+    </div>
+  </main>
+
+<footer class="footer">
+  <div class="footer-section logo-section">
+    <img src="img/ADNCAR.png" alt="Logo ADN CAR" class="logo" />
+  </div>
+
+  <div class="footer-section text-section">
+    <p class="direccion">📍 Calle Central, Cuscatancingo, San Salvador, El Salvador</p>
+    <p class="copyright">© 2025 ADN CAR. Todos los derechos reservados.</p>
+  </div>
+
+  <div class="footer-section social-icons">
+    <a href="https://www.instagram.com/eliezer_g59/" target="_blank">
+      <img src="instagram.png" alt="Instagram" />
+    </a>
+    <a href="https://www.facebook.com/frank.cabrera.408468/" target="_blank">
+      <img src="Facebook.png" alt="Facebook" />
+    </a>
+    <a href="https://wa.me/50371518713" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" />
+    </a>
+  </div>
+</footer>
+
+  <audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
+
+<script>
+    const muteBtn = document.getElementById('mute-btn');
+    const bgMusic = document.getElementById('bg-music');
+    muteBtn.addEventListener('click', () => {
+      bgMusic.muted = !bgMusic.muted;
+      muteBtn.classList.toggle('muted');
+    });
+    window.addEventListener('load', () => {
+      muteBtn.classList.toggle('muted', bgMusic.muted);
+    });
+    window.addEventListener('click', () => {
+      if (bgMusic.paused) bgMusic.play().catch(() => {});
+    }, { once: true });
+</script>
+
+</body>
+</html>

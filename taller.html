@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADN CAR - Taller</title>
+    <link rel="stylesheet" href="taller.css">
+</head>
+<body>
+       <header>
+  <div class="top-bar">
+    <img src="img/ADNCAR.png" alt="Logo" class="logo">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/eliezer_g59/"><img src="instagram.png" alt="Instagram"/></a>
+      <a href="https://www.facebook.com/frank.cabrera.408468/"><img src="Facebook.png" alt="Facebook"/></a>
+      <a href="https://wa.me/50371518713"><img src="whatsapp.png" alt="WhatsApp"/></a>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="taller.html">Taller</a></li>
+      <li><a href="cita.html">Cita</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <button id="mute-btn" class="mute-anim">
+        <span class="icon sound-on">🔊</span>
+        <span class="icon sound-off">🔇</span>
+      </button>
+    </ul>
+  </nav>
+</header>
+
+  <video id="bg-video" autoplay muted loop playsinline>
+  <source src="img/Fondo.mp4" type="video/mp4">
+</video>
+
+ <section class="pregunta">
+  <div class="contenedor-pregunta">
+    <h2 class="titulo-seccion">¿Quiénes somos?</h2>
+    <p class="texto">
+      En <strong>ADN CAR</strong> somos un taller automotriz especializado en diagnóstico, mantenimiento y reparación de vehículos de todas las marcas. 
+      Combinamos experiencia, tecnología y un servicio centrado en la seguridad y satisfacción del cliente.
+    </p>
+
+    <h2 class="titulo-seccion">Trayectoria y experiencia</h2>
+    <p class="texto">
+      Nuestra trayectoria en el sector automotriz nos convierte en referentes de calidad. Contamos con técnicos certificados y equipos de última generación 
+      para ofrecerte un servicio confiable, transparente y profesional.<br><br>
+      Hemos atendido cientos de vehículos particulares y comerciales, construyendo relaciones basadas en confianza, honestidad y resultados reales.
+    </p>
+
+    <div class="destacado">
+      <p><span class="icono">🛠️</span> Nuestro compromiso es claro: <strong>entregarte tu vehículo en óptimas condiciones</strong>, con garantía de calidad y respaldo profesional.</p>
+    </div>
+  </div>
+</section>
+
+<div class="proveedores-section">
+    <h2>Repuestos garantizados</h2>
+    <p>
+        Para asegurar una reparación rápida y confiable, trabajamos en alianza con proveedores líderes 
+        en el país. Estas alianzas nos permiten brindarte acceso a piezas originales y alternativas de excelente calidad, 
+        garantizando el óptimo funcionamiento de tu vehículo.
+    </p>
+
+    <div class="proveedores-grid">
+        <div class="proveedor rojo">
+            <img src="img/super.png" alt="Súper Repuestos">
+            <h3>Súper Repuestos</h3>
+        </div>
+        <div class="proveedor azul">
+            <img src="img/impressa.png" alt="Impresa Repuestos">
+            <h3>Impresa Repuestos</h3>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-section logo-section">
+    <img src="img/ADNCAR.png" alt="Logo ADN CAR" class="logo" />
+  </div>
+
+  <div class="footer-section text-section">
+    <p class="direccion">📍 Calle Central, Cuscatancingo, San Salvador, El Salvador</p>
+    <p class="copyright">© 2025 ADN CAR. Todos los derechos reservados.</p>
+  </div>
+
+  <div class="footer-section social-icons">
+    <a href="https://www.instagram.com/eliezer_g59/" target="_blank">
+      <img src="instagram.png" alt="Instagram" />
+    </a>
+    <a href="https://www.facebook.com/frank.cabrera.408468/" target="_blank">
+      <img src="Facebook.png" alt="Facebook" />
+    </a>
+    <a href="https://wa.me/50371518713" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" />
+    </a>
+  </div>
+</footer>
+
+
+    <audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
+
+<script>
+  const muteBtn = document.getElementById('mute-btn');
+  const bgMusic = document.getElementById('bg-music');
+
+  muteBtn.addEventListener('click', () => {
+    if (bgMusic.muted) {
+      bgMusic.muted = false;
+      muteBtn.classList.remove('muted');
+    } else {
+      bgMusic.muted = true;
+      muteBtn.classList.add('muted');
+    }
+  });
+
+  window.addEventListener('load', () => {
+    if (bgMusic.muted) {
+      muteBtn.classList.add('muted');
+    } else {
+      muteBtn.classList.remove('muted');
+    }
+  });
+
+  window.addEventListener('click', () => {
+    if (bgMusic.paused) {
+      bgMusic.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+
+</body>
+</html>

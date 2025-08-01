@@ -1,0 +1,515 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #555;
+  background-size: cover;
+  background-position: center;
+  color: black;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #ccc, 0 0 20px #888;
+  }
+  50% {
+    box-shadow: 0 0 15px #fff, 0 0 30px #999;
+  }
+}
+
+/* Parte superior */
+.top-bar {
+  background-color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+#mute-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-left: 15px;
+  flex-shrink: 0;
+}
+
+#mute-btn .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  font-size: 28px;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sound-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sound-off {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.muted .sound-on {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.muted .sound-off {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#mute-btn:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Menú principal */
+.main-nav {
+  background-color: #333;
+}
+
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 10px 20px;
+  gap: 15px;
+  overflow-x: auto; /* scroll horizontal si no cabe */
+  -webkit-overflow-scrolling: touch; /* scroll suave iOS */
+}
+
+.main-nav li {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #000000;
+  text-decoration: underline;
+  background-color: #999;
+  border: 1px solid whitesmoke;
+  box-shadow: 0 0 8px white;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 20px 30px;
+  background-color: #111;
+  color: white;
+}
+
+.footer-section {
+  margin: 0 15px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.text-section {
+  font-size: 15px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  padding-right: 20px;
+  text-align: left;
+  color: white;
+}
+
+.direccion {
+  margin-bottom: 25px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.social-icons img {
+  width: 60px;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Fondo video */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+
+
+
+
+/* ===================== */
+/* RESPONSIVO PARA MÓVILES */
+/* ===================== */
+@media (max-width: 480px) {
+  /* Ajustar top-bar */
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 80px;
+    height: auto;
+  }
+
+  #mute-btn {
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Menú principal con scroll horizontal y espacio adecuado */
+  .main-nav ul {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .main-nav a {
+    font-size: 14px;
+    padding: 0.4rem 0.7rem;
+  }
+
+  /* Footer en columnas */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .footer-section {
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  .logo-section .logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .text-section {
+    font-size: 14px;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .social-icons {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .social-icons img {
+    width: 40px;
+  }
+
+  /* Fondo de video más tenue para mejor rendimiento en móviles */
+  #bg-video {
+    opacity: 0.15;
+  }
+}
+
+
+
+
+
+/* Título */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 30px 0 20px;
+}
+
+/* Filtros */
+.filters,
+.subfilters,
+.brandfilters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters button,
+.subfilters button,
+.brandfilters button {
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.filters button:hover,
+.subfilters button:hover,
+.brandfilters button:hover {
+  background: #000;
+  color: whitesmoke;
+}
+
+.filters button.activo {
+  background: #000;
+  color: #000;
+}
+
+/* Contenedor de productos */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+/* Tarjeta de producto */
+.product-card {
+  background: #000;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 320px;
+  margin: auto;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.product-card p {
+  font-size: 0.95rem;
+  color: whitesmoke;
+  margin-bottom: 5px;
+}
+
+.product-card .availability {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.availability.en-stock {
+  color: green;
+}
+
+.availability.no-disponible {
+  color: red;
+}
+
+/* Botón mostrar detalle */
+.product-card .show-details {
+  margin-top: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.product-card .show-details:hover {
+  background: #0056b3;
+}
+
+/* Botón WhatsApp */
+.product-card .whatsapp-button {
+  margin-top: 10px;
+  display: block;
+  background: #25d366;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* Detalles ocultos inicialmente */
+.product-details {
+  display: none;
+  margin-top: 10px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.marcas {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px 20px;
+  margin: 30px 0;
+  border-radius: 12px;
+}
+
+.marcas h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.logos-marcas {
+  display: flex;
+  flex-wrap: nowrap; /* fuerza una sola línea */
+  overflow-x: auto; /* scroll horizontal si es necesario */
+  padding: 20px 20px 40px;
+  gap: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+/* Estilo para el scroll en navegadores webkit (Chrome, Edge) */
+.logos-marcas::-webkit-scrollbar {
+  height: 20px;
+}
+
+.logos-marcas::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.logos-marcas::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.marcas {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.9); /* corregido */
+  padding: 40px 20px;
+  margin: 30px 0;
+  border-radius: 12px;
+}
+
+.logos-marcas img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logos-marcas img:hover {
+  transform: scale(1.1);
+}
+
+/* Botones activos (categoría o tipo) */
+.filters button.activo,
+.subfilters button.activo,
+.brandfilters button.activo {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen de marca seleccionada */
+.logos-marcas img.activo {
+  box-shadow: 0 0 12px 3px rgba(51, 51, 51, 0.7);
+  border-radius: 10px;
+  transform: scale(1.05);
+  z-index: 1; /* nuevo */
+  position: relative; /* nuevo */
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADN CAR - Inicio</title>
+    <link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+    <img src="img/ADNCAR.png" alt="Logo" class="logo">
+    <div class="social-icons">
+        <a href="https://www.instagram.com/eliezer_g59/"><img src="instagram.png" alt="Instagram"/></a>
+        <a href="https://www.facebook.com/frank.cabrera.408468/"><img src="Facebook.png" alt="Facebook"/></a>
+        <a href="https://wa.me/50371518713"><img src="whatsapp.png" alt="WhatsApp"/></a>
+    </div>
+</div>
+<nav class="main-nav">
+   <ul>
+  <li><a href="index.html">Inicio</a></li>
+  <li><a href="catalogo.html">Catálogo</a></li>
+  <li><a href="servicios.html">Servicios</a></li>
+  <li><a href="taller.html">Taller</a></li>
+  <li><a href="cita.html">Cita</a></li>
+  <li><a href="contacto.html">Contacto</a></li>
+
+  <button id="mute-btn" class="mute-anim">
+    <span class="icon sound-on">🔊</span>
+    <span class="icon sound-off">🔇</span>
+  </button>
+</ul>
+</nav>
+    </header>
+
+    <video id="bg-video" autoplay muted loop playsinline>
+  <source src="img/Fondo.mp4" type="video/mp4">
+</video>
+
+    <div class ="hero">
+    <h1>AGENDA TU SERVICIO EN LÍNEA ¡AHORA!</h1>
+    <button type="button" onclick="window.location.href='cita.html'">AGENDE AQUI</button>
+    </div>
+
+    <section>
+        <div class="fondo">
+        <h2>¿PORQUÉ NOSOTROS?</h2>
+        <p>En nuestro taller mecánico, no solo reparamos vehículos: ofrecemos soluciones
+confiables con un trato honesto y profesional.
+  <div class="porque-slider-container">
+    <div class="porque-slider">
+      <div class="porque-card">✔ Experiencia comprobada: Contamos con años de trayectoria y un equipo de técnicos certificados.</div>
+      <div class="porque-card">✔ Diagnóstico preciso: Utilizamos tecnología de punta para detectar fallas de forma rápida y certera.</div>
+      <div class="porque-card">✔ Transparencia total: Te explicamos cada reparación y sus costos antes de comenzar.</div>
+      <div class="porque-card">✔ Repuestos de calidad: Solo trabajamos con piezas originales o de alto rendimiento.</div>
+      <div class="porque-card">✔ Atención personalizada: Nos adaptamos a tus tiempos y necesidades, con un servicio cercano y eficiente.</div>
+
+      <!-- Duplicados para el bucle -->
+      <div class="porque-card">✔ Experiencia comprobada: Contamos con años de trayectoria y un equipo de técnicos certificados.</div>
+      <div class="porque-card">✔ Diagnóstico preciso: Utilizamos tecnología de punta para detectar fallas de forma rápida y certera.</div>
+      <div class="porque-card">✔ Transparencia total: Te explicamos cada reparación y sus costos antes de comenzar.</div>
+      <div class="porque-card">✔ Repuestos de calidad: Solo trabajamos con piezas originales o de alto rendimiento.</div>
+      <div class="porque-card">✔ Atención personalizada: Nos adaptamos a tus tiempos y necesidades, con un servicio cercano y eficiente.</div>
+    </div>
+  </div>
+        </div>
+        <br>
+        <div class="info">
+  <h2>¿QUÉ NECESITAS?</h2>
+   <video autoplay loop muted playsinline class="video-fondo">
+  <source src="video.mp4" type="video/mp4">
+</video>
+  <div class="info-grid">
+    <div class="info-item">
+      <h3>🔧 Mantenimiento Total</h3>
+      <p>Prevención y corrección en un solo lugar. Nos aseguramos de que tu auto esté siempre al 100%.</p>
+    </div>
+    <div class="info-item">
+      <h3>🧠 Diagnóstico Electrónico</h3>
+      <p>Identificamos cualquier falla con precisión milimétrica gracias a equipos de última generación.</p>
+    </div>
+    <div class="info-item">
+      <h3>⚙ Reparaciones Generales</h3>
+      <p>Motor, frenos, suspensión y mucho más. Nuestro equipo lo soluciona con experiencia y rapidez.</p>
+    </div>
+    <div class="info-item">
+      <h3>💧 Cambio de Aceite y Filtros</h3>
+      <p>Mantén tu motor limpio y eficiente con nuestros servicios rápidos y garantizados.</p>
+    </div>
+    <div class="info-item">
+      <h3>🔋 Eléctrico y Baterías</h3>
+      <p>Solucionamos problemas de luces, batería, alternador, arranque y más.</p>
+    </div>
+    <div class="info-item">
+      <h3>🛡 Revisión Pre-Técnico Mecánica</h3>
+      <p>¿Toca revisión? Te ayudamos a pasarla sin sorpresas. Hacemos un chequeo completo.</p>
+    </div>
+  </div>
+  <div class="info-footer">
+    <p>Solo dinos qué necesitas y nos encargamos del resto.</p>
+    <p><strong>¡Cotiza sin compromiso y vuelve a la carretera con confianza!</strong></p>
+  </div>
+</div>
+    </section>
+    <script>
+  const infoItems = document.querySelectorAll('.info-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Asigna un delay basado en la posición del item
+        entry.target.style.animationDelay = `${index * 0.2}s`;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Solo una vez
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  infoItems.forEach((item) => observer.observe(item));
+</script>
+<audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
+
+<script>
+  const muteBtn = document.getElementById('mute-btn');
+  const bgMusic = document.getElementById('bg-music');
+
+  muteBtn.addEventListener('click', () => {
+    if (bgMusic.muted) {
+      bgMusic.muted = false;
+      muteBtn.classList.remove('muted');
+    } else {
+      bgMusic.muted = true;
+      muteBtn.classList.add('muted');
+    }
+  });
+
+  window.addEventListener('load', () => {
+    if (bgMusic.muted) {
+      muteBtn.classList.add('muted');
+    } else {
+      muteBtn.classList.remove('muted');
+    }
+  });
+
+  window.addEventListener('click', () => {
+    if (bgMusic.paused) {
+      bgMusic.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+
+<footer class="footer">
+  <div class="footer-section logo-section">
+    <img src="img/ADNCAR.png" alt="Logo ADN CAR" class="logo" />
+  </div>
+
+  <div class="footer-section text-section">
+    <p class="direccion">📍 Calle Central, Cuscatancingo, San Salvador, El Salvador</p>
+    <p class="copyright">© 2025 ADN CAR. Todos los derechos reservados.</p>
+  </div>
+
+  <div class="footer-section social-icons">
+    <a href="https://www.instagram.com/eliezer_g59/" target="_blank">
+      <img src="instagram.png" alt="Instagram" />
+    </a>
+    <a href="https://www.facebook.com/frank.cabrera.408468/" target="_blank">
+      <img src="Facebook.png" alt="Facebook" />
+    </a>
+    <a href="https://wa.me/50371518713" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" />
+    </a>
+  </div>
+</footer>
+
+ 
+
+</body>
+</html>
