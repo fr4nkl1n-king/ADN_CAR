@@ -109,30 +109,43 @@
   const muteBtn = document.getElementById('mute-btn');
   const bgMusic = document.getElementById('bg-music');
 
+  // Botón para silenciar manualmente
   muteBtn.addEventListener('click', () => {
-    if (bgMusic.muted) {
-      bgMusic.muted = false;
-      muteBtn.classList.remove('muted');
-    } else {
-      bgMusic.muted = true;
-      muteBtn.classList.add('muted');
-    }
+    bgMusic.muted = !bgMusic.muted;
+    muteBtn.classList.toggle('muted');
   });
 
+  // Al cargar la página, sincroniza ícono con estado del audio
   window.addEventListener('load', () => {
-    if (bgMusic.muted) {
-      muteBtn.classList.add('muted');
-    } else {
-      muteBtn.classList.remove('muted');
-    }
+    muteBtn.classList.toggle('muted', bgMusic.muted);
   });
 
+  // Reproduce música al primer clic
   window.addEventListener('click', () => {
-    if (bgMusic.paused) {
+    if (bgMusic.paused) bgMusic.play().catch(() => {});
+  }, { once: true });
+
+  // Pausar la música si se oculta la pestaña o bloquea pantalla
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      bgMusic.pause();
+    } else if (!bgMusic.muted) {
       bgMusic.play().catch(() => {});
     }
-  }, { once: true });
+  });
+
+  // También manejar eventos de cierre parcial de página o blur (respaldo)
+  window.addEventListener('blur', () => {
+    bgMusic.pause();
+  });
+
+  window.addEventListener('focus', () => {
+    if (!document.hidden && !bgMusic.muted) {
+      bgMusic.play().catch(() => {});
+    }
+  });
 </script>
+
 
 </body>
 </html>

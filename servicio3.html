@@ -112,18 +112,46 @@
   <audio id="bg-music" src="Musica.mp3" autoplay loop></audio>
 
   <script>
-    const muteBtn = document.getElementById('mute-btn');
-    const bgMusic = document.getElementById('bg-music');
-    muteBtn.addEventListener('click', () => {
-      bgMusic.muted = !bgMusic.muted;
-      muteBtn.classList.toggle('muted');
-    });
-    window.addEventListener('load', () => {
-      muteBtn.classList.toggle('muted', bgMusic.muted);
-    });
-    window.addEventListener('click', () => {
-      if (bgMusic.paused) bgMusic.play().catch(() => {});
-    }, { once: true });
+
+  const muteBtn = document.getElementById('mute-btn');
+  const bgMusic = document.getElementById('bg-music');
+
+  // Botón para silenciar manualmente
+  muteBtn.addEventListener('click', () => {
+    bgMusic.muted = !bgMusic.muted;
+    muteBtn.classList.toggle('muted');
+  });
+
+  // Al cargar la página, sincroniza ícono con estado del audio
+  window.addEventListener('load', () => {
+    muteBtn.classList.toggle('muted', bgMusic.muted);
+  });
+
+  // Reproduce música al primer clic
+  window.addEventListener('click', () => {
+    if (bgMusic.paused) bgMusic.play().catch(() => {});
+  }, { once: true });
+
+  // Pausar la música si se oculta la pestaña o bloquea pantalla
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      bgMusic.pause();
+    } else if (!bgMusic.muted) {
+      bgMusic.play().catch(() => {});
+    }
+  });
+
+  // También manejar eventos de cierre parcial de página o blur (respaldo)
+  window.addEventListener('blur', () => {
+    bgMusic.pause();
+  });
+
+  window.addEventListener('focus', () => {
+    if (!document.hidden && !bgMusic.muted) {
+      bgMusic.play().catch(() => {});
+    }
+  });
+
 
     // Confirmación de envío
     document.getElementById('contacto-form').addEventListener('submit', function(e) {
