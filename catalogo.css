@@ -369,33 +369,48 @@ h1 {
   border-radius: 12px;
   padding: 16px;
   max-width: 320px;
-  margin: auto;
+  height: 100%; /* Asegura altura completa */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   animation: fadeIn 0.5s ease-in-out;
 }
 
-.product-card:hover {
-  transform: scale(1.03);
+/* Contenedor interno con altura fija para igualar tarjetas */
+.product-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
+/* Imagen del producto */
 .product-card img {
   width: 100%;
+  height: 180px; /* Altura fija */
+  object-fit: contain; /* Mantiene proporción sin recortar */
   border-radius: 8px;
+   background: #000;
 }
 
+/* Título del producto */
 .product-card h3 {
   margin: 10px 0 5px;
   font-size: 1.2rem;
   color: white;
+  flex-shrink: 0;
 }
 
+/* Descripción */
 .product-card p {
   font-size: 0.95rem;
   color: whitesmoke;
   margin-bottom: 5px;
+  flex-grow: 1;
 }
 
+/* Disponibilidad */
 .product-card .availability {
   font-weight: bold;
   margin-bottom: 10px;
@@ -411,7 +426,7 @@ h1 {
 
 /* Botón mostrar detalle */
 .product-card .show-details {
-  margin-top: 10px;
+  margin-top: auto;
   background: #007bff;
   color: #fff;
   border: none;
@@ -445,6 +460,7 @@ h1 {
   display: none;
   margin-top: 10px;
 }
+
 
 /* Animaciones */
 @keyframes fadeIn {
