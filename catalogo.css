@@ -355,34 +355,34 @@ h1 {
 
 /* Contenedor de productos */
 .product-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
-  margin-bottom: 40px;
+  display: flex; /* Organiza en fila(s) */
+  flex-wrap: wrap; /* Permite saltar a la siguiente línea */
+  gap: 20px; /* Espacio entre tarjetas */
+  justify-content: center; /* Centra horizontalmente las tarjetas */
+  padding: 20px; /* Espacio interior */
 }
 
-/* Tarjeta de producto */
 .product-card {
-  background: #000;
-  border: 1px solid black;
-  border-radius: 12px;
-  padding: 16px;
-  max-width: 320px;
-  height: 100%; /* Asegura altura completa */
+  background: #000; /* Fondo negro */
+  color: white; /* Texto blanco */
+  flex: 1 1 280px; /* Base 280px, puede crecer o reducirse */
+  max-width: 280px; /* No crece más que 280px */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 16px; /* Espacio interno */
+  box-sizing: border-box; /* Incluye padding y borde en ancho */
+  /* Opcional para que la altura sea automática según contenido */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  animation: fadeIn 0.5s ease-in-out;
+  justify-content: flex-start;
 }
+
 
 /* Contenedor interno con altura fija para igualar tarjetas */
 .product-card-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 0; /* IMPORTANTE: que no crezca más de la cuenta */
+  height: auto; /* QUITA height: 100% si lo tenías */
 }
 
 /* Imagen del producto */
@@ -408,6 +408,7 @@ h1 {
   color: whitesmoke;
   margin-bottom: 5px;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 /* Disponibilidad */
@@ -415,6 +416,28 @@ h1 {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+
+/* Detalles del producto */
+.product-details {
+  display: none;
+  margin-top: 10px;
+}
+
+
+@keyframes fadeInDetails {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
 
 .availability.en-stock {
   color: green;
@@ -427,7 +450,7 @@ h1 {
 /* Botón mostrar detalle */
 .product-card .show-details {
   margin-top: auto;
-  background: #007bff;
+  background: #0300b3;
   color: #fff;
   border: none;
   padding: 10px;
@@ -435,24 +458,37 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s;
+   border: 3px solid transparent;
+   border-radius: 5px; /* radio actual */
+  transition: border-color 0.3s ease;
 }
 
 .product-card .show-details:hover {
-  background: #0056b3;
+  background: #bcb4ff;
+    color: #0300b3;
+   border-color: #0300b3; 
 }
 
 /* Botón WhatsApp */
 .product-card .whatsapp-button {
   margin-top: 10px;
   display: block;
-  background: #25d366;
+  background: #2bd325;
   color: #fff;
   text-align: center;
   padding: 10px;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
+   border: 3px solid transparent;
+   border-radius: 5px; /* radio actual */
+  transition: border-color 0.3s ease;
+}
+
+.product-card .whatsapp-button:hover {
+  background: #d5ffcc;
+  color: #2bd325;
+   border-color: #2bd325; 
 }
 
 /* Detalles ocultos inicialmente */

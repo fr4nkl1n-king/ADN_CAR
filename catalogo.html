@@ -1567,7 +1567,7 @@ const productos = [
 {
   nombre: "Parachoques delantero Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Parachoques delantero para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1577,7 +1577,7 @@ const productos = [
 {
   nombre: "Parachoques trasero Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Parachoques trasero para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1587,7 +1587,7 @@ const productos = [
 {
   nombre: "Capó Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Capó para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1597,7 +1597,7 @@ const productos = [
 {
   nombre: "Puerta izquierda Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Puerta izquierda para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1607,7 +1607,7 @@ const productos = [
 {
   nombre: "Puerta derecha Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Puerta derecha para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1617,7 +1617,7 @@ const productos = [
 {
   nombre: "Guardabarros Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Guardabarros para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1627,7 +1627,7 @@ const productos = [
 {
   nombre: "Espejo lateral Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Espejo lateral para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1637,7 +1637,7 @@ const productos = [
 {
   nombre: "Faro delantero Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Faro delantero para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1647,7 +1647,7 @@ const productos = [
 {
   nombre: "Luz trasera Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Luz trasera para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1657,7 +1657,7 @@ const productos = [
 {
   nombre: "Parrilla frontal Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Parrilla frontal para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1667,7 +1667,7 @@ const productos = [
 {
   nombre: "Alerón Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Alerón trasero para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1677,7 +1677,7 @@ const productos = [
 {
   nombre: "Moldura lateral Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Moldura lateral para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1687,7 +1687,7 @@ const productos = [
 {
   nombre: "Panel de techo Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Panel de techo para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1697,7 +1697,7 @@ const productos = [
 {
   nombre: "Cristal lateral Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Cristal lateral para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -1707,7 +1707,7 @@ const productos = [
 {
   nombre: "Manija de puerta Nissan",
   tipo: "auto",
-  categoria: "carrocería",
+  categoria: "carroceria",
   marca: "Nissan",
   descripcion: "Manija de puerta para Nissan.",
   disponibilidad: "Consultar disponibilidad",
@@ -22531,7 +22531,7 @@ const productos = [
 };
 
 // Referencias a elementos HTML
-const container = document.getElementById("product-container");
+
 const subfilters = document.getElementById("subfilters");
 const logosMarcas = document.getElementById("logos-marcas");
 
@@ -22572,6 +22572,7 @@ function actualizarFiltroMarca(marca) {
 
 // Renderiza productos filtrados
 function renderProductos() {
+  const container = document.querySelector(".product-container");
   container.innerHTML = "";
 
   const filtrados = productos.filter(
@@ -22589,40 +22590,58 @@ function renderProductos() {
 
   filtrados.forEach((prod) => {
     const card = document.createElement("div");
-    card.className = "product-card";
+    card.classList.add("product-card");
 
-   card.innerHTML = `
-  <img src="${prod.imagen}" alt="${prod.nombre}">
-  <h3>${prod.nombre}</h3>
-  <p class="availability ${
-    prod.disponibilidad.toLowerCase().includes("stock")
-      ? "en-stock"
-      : "no-disponible"
-  }">${prod.disponibilidad}</p>
-  <button class="show-details">Mostrar detalle</button>
-  <div class="product-details" style="display:none;">
-    <p><strong>Descripción:</strong> ${prod.descripcion}</p>
-    <p><strong>Marca:</strong> ${prod.marca}</p>
-    <a class="whatsapp-button" target="_blank"
-      href="https://wa.me/50371518713?text=Hola,%20quiero%20consultar%20sobre:%20${encodeURIComponent(
-        prod.nombre
-      )}%20de%20la%20marca%20${encodeURIComponent(prod.marca)}">
-      Consultar producto
-    </a>
-  </div>
-`;
-
+    card.innerHTML = `
+      <img src="${prod.imagen}" alt="${prod.nombre}">
+      <h3>${prod.nombre}</h3>
+      <p class="availability ${
+        prod.disponibilidad.toLowerCase().includes("stock")
+          ? "en-stock"
+          : "no-disponible"
+      }">${prod.disponibilidad}</p>
+      <button class="show-details">Mostrar detalle</button>
+      <div class="product-details" style="display: none;">
+        <p><strong>Descripción:</strong> ${prod.descripcion}</p>
+        <p><strong>Marca:</strong> ${prod.marca}</p>
+        <a class="whatsapp-button" target="_blank"
+          href="https://wa.me/50371518713?text=Hola,%20quiero%20consultar%20sobre:%20${encodeURIComponent(
+            prod.nombre
+          )}%20de%20la%20marca%20${encodeURIComponent(prod.marca)}">
+          Consultar producto
+        </a>
+      </div>
+    `;
 
     const btnDetalle = card.querySelector(".show-details");
     const detalles = card.querySelector(".product-details");
 
-    btnDetalle.addEventListener("click", () => {
-      detalles.style.display = detalles.style.display === "none" ? "block" : "none";
-    });
+btnDetalle.addEventListener("click", () => {
+  const abierto = detalles.style.display === "block";
+  const todasTarjetas = container.querySelectorAll(".product-card");
+
+  // Cerrar todos
+  todasTarjetas.forEach((tarjeta) => {
+    const detallesTarjeta = tarjeta.querySelector(".product-details");
+    const btnTarjeta = tarjeta.querySelector(".show-details");
+    detallesTarjeta.style.display = "none";
+    btnTarjeta.textContent = "Mostrar detalle";
+  });
+
+  // Mostrar el clickeado si no estaba abierto
+  if (!abierto) {
+    detalles.style.display = "block";
+    btnDetalle.textContent = "Menos detalles";
+  }
+});
+
+
+
 
     container.appendChild(card);
   });
 }
+
 
 // Event listener para las imágenes de marcas
 logosMarcas.querySelectorAll("img").forEach((img) => {
